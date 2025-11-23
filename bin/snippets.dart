@@ -74,7 +74,8 @@ void main() {
 
   // The 'mutableUser' getter provides access to a mutable version of 'user'.
   // If 'user' is already mutable, it returns it directly.
-  // If 'user' is frozen, it creates a mutable shallow copy, assigns it to 'user', and returns it.
+  // If 'user' is frozen, it creates a mutable shallow copy, assigns it to
+  // 'user', and returns it.
 
   // The user is currently 'mutableLyla', which is mutable.
   assert(identical(userHistory.mutableUser, mutableLyla));
@@ -144,9 +145,7 @@ void main() {
 
   assert(johnStatus == User_SubscriptionStatus.free);
   assert(janeStatus == User_SubscriptionStatus.premium);
-
-  // Use isUnknown for UNKNOWN
-  assert(janeStatus.isUnknown);
+  assert(janeStatus == User_SubscriptionStatus.unknown);
 
   if (roniStatus is User_SubscriptionStatus_trialWrapper) {
     assert(roniStatus.value.startTime.millisecondsSinceEpoch == 1234);

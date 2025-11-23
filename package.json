@@ -5,11 +5,11 @@
     "install-dart-deps": "cd lib && dart pub get && cd ..",
     "build": "npm run soiac && cd lib && dart analyze && cd ..",
     "run:snippets": "dart run bin/snippets.dart",
-    "run:start-service": "npm run build && python3 start_service.py",
-    "run:call-service": "npm run build && python3 call_service.py"
+    "run:start-service": "npm run build && dart run bin/start_service.dart",
+    "run:call-service": "npm run build && dart run bin/call_service.dart"
   },
   "devDependencies": {
-    "soia-dart-gen": "^1.0.1",
+    "soia-dart-gen": "^1.0.2",
     "soiac": "^1.0.51"
   }
 }
