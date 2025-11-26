@@ -5,6 +5,7 @@
     "install-dart-deps": "cd lib && dart pub get && cd ..",
     "build": "npm run soiac && cd lib && dart analyze && cd ..",
     "run:snippets": "dart run bin/snippets.dart",
+    "run:reflection": "dart run bin/reflection.dart",
     "run:start-service": "npm run build && dart run bin/start_service.dart",
     "run:call-service": "npm run build && dart run bin/call_service.dart"
   },

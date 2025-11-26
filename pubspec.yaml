@@ -6,7 +6,7 @@ environment:
   sdk: ^3.5.0
 
 dependencies:
-  soia: ^0.2.1
+  soia: ^0.2.10
   shelf: ^1.4.0
 
 dev_dependencies:
