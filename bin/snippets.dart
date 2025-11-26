@@ -229,7 +229,9 @@ void main() {
       serializer.fromBytes(serializer.toBytes(mutableLyla.toFrozen()));
   assert(reserializedLyla.name == "Lyla Doe");
 
+  // ===========================================================================
   // FROZEN LISTS AND COPIES
+  // ===========================================================================
 
   final pets = [
     User_Pet(name: "Fluffy", heightInMeters: 0.25, picture: "🐶"),
