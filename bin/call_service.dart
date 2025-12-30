@@ -1,15 +1,15 @@
-// Sends RPCs to a soia service.
+// Sends RPCs to a skir service.
 // See start_service.dart for how to start one.
 //
 // Run:
 //   dart run bin/call_service.dart
 
-import 'package:soia/soia.dart' as soia;
-import 'package:soia_dart_example/soiagen/service.dart';
-import 'package:soia_dart_example/soiagen/user.dart';
+import 'package:skir_client/skir_client.dart' as skir;
+import 'package:skir_dart_example/skirout/service.dart';
+import 'package:skir_dart_example/skirout/user.dart';
 
 void main() async {
-  final serviceClient = soia.ServiceClient('http://localhost:8787/myapi');
+  final serviceClient = skir.ServiceClient('http://localhost:8787/myapi');
 
   print('');
   print('About to add 2 users: John Doe and Tarzan');

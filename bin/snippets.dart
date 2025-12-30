@@ -3,9 +3,9 @@
 // Run with:
 //   dart run bin/snippets.dart
 
-import 'package:soia/soia.dart' as soia;
-import 'package:soia_dart_example/all_strings_to_upper_case.dart';
-import 'package:soia_dart_example/soiagen/user.dart';
+import 'package:skir_client/skir_client.dart' as skir;
+import 'package:skir_dart_example/all_strings_to_upper_case.dart';
+import 'package:skir_dart_example/skirout/user.dart';
 
 // ignore_for_file: unused_local_variable
 // ignore_for_file: unused_element
@@ -15,7 +15,7 @@ void main() {
   // FROZEN STRUCT CLASSES
   // ===========================================================================
 
-  // For every struct S in the .soia file, soia generates a frozen (deeply
+  // For every struct S in the .skir file, skir generates a frozen (deeply
   // immutable) class 'S' and a mutable class 'S_mutable'.
 
   // Construct a frozen User.
@@ -268,15 +268,19 @@ void main() {
   // ===========================================================================
 
   final userRegistry = UserRegistry(
-    users: [john, jane, mutableLyla],
+    users: [john, jane, mutableLyla, evilJane],
   );
 
-  // find() returns the user with the given key (specified in the .soia file).
+  // find() returns the user with the given key (specified in the .skir file).
   // In this example, the key is the user id.
   // The first lookup runs in O(N) time, and the following lookups run in O(1)
   // time.
   assert(userRegistry.users.findByKey(42) == john);
   assert(userRegistry.users.findByKey(100) == null);
+
+  // If multiple elements have the same key, find() returns the last one.
+  // Duplicates are allowed but generally discouraged.
+  assert(userRegistry.users.findByKey(43) == evilJane);
 
   // ===========================================================================
   // CONSTANTS
@@ -308,7 +312,7 @@ void main() {
   // REFLECTION
   // ===========================================================================
 
-  // Reflection allows you to inspect a soia type at runtime.
+  // Reflection allows you to inspect a skir type at runtime.
 
   final fieldNames = <String>[];
   for (final field in User.serializer.typeDescriptor.fields) {
@@ -318,7 +322,7 @@ void main() {
   // [user_id, name, quote, pets, subscription_status]
 
   // A type descriptor can be serialized to JSON and deserialized later.
-  final typeDescriptor = soia.TypeDescriptor.parseFromJson(
+  final typeDescriptor = skir.TypeDescriptor.parseFromJson(
     User.serializer.typeDescriptor.asJson,
   );
   print("Type descriptor deserialized successfully");
@@ -326,7 +330,7 @@ void main() {
   // The 'allStringsToUpperCase' function uses reflection to convert all the
   // strings contained in a given Soia value to upper case.
   // See the implementation at
-  // https://github.com/gepheum/soia-dart-example/blob/main/lib/all_strings_to_upper_case.dart
+  // https://github.com/gepheum/skir-dart-example/blob/main/lib/all_strings_to_upper_case.dart
   print(allStringsToUpperCase<User>(tarzan, User.serializer.typeDescriptor));
   // User(
   //   userId: 123,

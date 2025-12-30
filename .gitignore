@@ -6,6 +6,6 @@ build/
 doc/api/
 node_modules/
 pubspec.lock
-soiagen/
+skirout/
 
 *.iml

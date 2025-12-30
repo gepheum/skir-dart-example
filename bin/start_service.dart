@@ -1,4 +1,4 @@
-// Starts a soia service on http://localhost:8787/myapi
+// Starts a skir service on http://localhost:8787/myapi
 //
 // Run with:
 //   dart run bin/start_service.dart
@@ -7,9 +7,9 @@
 
 import 'package:shelf/shelf.dart';
 import 'package:shelf/shelf_io.dart' as shelf_io;
-import 'package:soia/soia.dart' as soia;
-import 'package:soia_dart_example/soiagen/service.dart';
-import 'package:soia_dart_example/soiagen/user.dart';
+import 'package:skir_client/skir_client.dart' as skir;
+import 'package:skir_dart_example/skirout/service.dart';
+import 'package:skir_dart_example/skirout/user.dart';
 
 /// Custom request metadata that includes both request and response headers.
 class RequestMetadata {
@@ -64,7 +64,7 @@ void main() async {
     final metadata = RequestMetadata(requestHeaders, responseHeaders);
 
     // Build a service for this request with access to metadata
-    final soiaService = soia.Service.builderWithMeta<RequestMetadata>(
+    final skirService = skir.Service.builderWithMeta<RequestMetadata>(
       (_) => metadata,
     ).addMethod(addUserMethod, (req, meta) async {
       return serviceImpl.addUser(req, meta);
@@ -72,7 +72,7 @@ void main() async {
       return serviceImpl.getUser(req, meta);
     }).build();
 
-    final rawResponse = await soiaService.handleRequest(
+    final rawResponse = await skirService.handleRequest(
       requestBody,
       requestHeaders,
     );

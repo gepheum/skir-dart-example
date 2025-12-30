@@ -2,7 +2,7 @@
 
 set -e
 
-npm i
-npm run install-dart-deps
-npm run build
-npm run run:snippets
+dart pub get
+npx skir gen
+dart analyze
+dart run --enable-asserts bin/snippets.dart

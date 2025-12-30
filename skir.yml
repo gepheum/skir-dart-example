@@ -1,0 +1,6 @@
+srcDir: ./skir-src
+
+generators:
+  - mod: skir-dart-gen
+    outDir: ./lib/skirout
+    config: {}
