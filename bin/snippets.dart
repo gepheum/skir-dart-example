@@ -31,7 +31,7 @@ void main() {
         picture: "🐘",
       ),
     ],
-    subscriptionStatus: User_SubscriptionStatus.free,
+    subscriptionStatus: SubscriptionStatus.free,
     // foo: "bar",
     // ^ Does not compile: 'foo' is not a field of User
   );
@@ -131,22 +131,22 @@ void main() {
   // MAKING ENUM VALUES
   // ===========================================================================
 
-  final johnStatus = User_SubscriptionStatus.free;
-  final janeStatus = User_SubscriptionStatus.premium;
+  final johnStatus = SubscriptionStatus.free;
+  final janeStatus = SubscriptionStatus.premium;
 
-  final jolyStatus = User_SubscriptionStatus.unknown;
+  final jolyStatus = SubscriptionStatus.unknown;
 
   // Use wrapX() or createX() for wrapper fields:
   //   - wrapX() expects the value to wrap.
   //   - createX() creates a new struct with the given params and wraps it
 
-  final roniStatus = User_SubscriptionStatus.wrapTrial(
-    User_Trial(
+  final roniStatus = SubscriptionStatus.wrapTrial(
+    SubscriptionStatus_Trial(
         startTime: DateTime.fromMillisecondsSinceEpoch(1234, isUtc: true)),
   );
 
   // More concisely, with createX():
-  final ericStatus = User_SubscriptionStatus.createTrial(
+  final ericStatus = SubscriptionStatus.createTrial(
     startTime: DateTime.fromMillisecondsSinceEpoch(5678, isUtc: true),
   );
 
@@ -154,23 +154,23 @@ void main() {
   // CONDITIONS ON ENUMS
   // ===========================================================================
 
-  assert(johnStatus == User_SubscriptionStatus.free);
-  assert(janeStatus == User_SubscriptionStatus.premium);
-  assert(jolyStatus == User_SubscriptionStatus.unknown);
+  assert(johnStatus == SubscriptionStatus.free);
+  assert(janeStatus == SubscriptionStatus.premium);
+  assert(jolyStatus == SubscriptionStatus.unknown);
 
-  if (roniStatus is User_SubscriptionStatus_trialWrapper) {
+  if (roniStatus is SubscriptionStatus_trialWrapper) {
     assert(roniStatus.value.startTime.millisecondsSinceEpoch == 1234);
   } else {
     throw AssertionError();
   }
 
-  String getSubscriptionInfoText(User_SubscriptionStatus status) {
+  String getSubscriptionInfoText(SubscriptionStatus status) {
     // Use pattern matching for typesafe switches on enums.
     return switch (status) {
-      User_SubscriptionStatus_unknown() => "Unknown subscription status",
-      User_SubscriptionStatus.free => "Free user",
-      User_SubscriptionStatus.premium => "Premium user",
-      User_SubscriptionStatus_trialWrapper(:final value) =>
+      SubscriptionStatus_unknown() => "Unknown subscription status",
+      SubscriptionStatus.free => "Free user",
+      SubscriptionStatus.premium => "Premium user",
+      SubscriptionStatus_trialWrapper(:final value) =>
         "On trial since ${value.startTime}",
     };
   }
@@ -244,7 +244,7 @@ void main() {
     quote: "",
     pets: pets,
     // ^ makes a copy of 'pets' because 'pets' is mutable
-    subscriptionStatus: User_SubscriptionStatus.unknown,
+    subscriptionStatus: SubscriptionStatus.unknown,
   );
 
   // jade.pets.add(...)
@@ -258,7 +258,7 @@ void main() {
     quote: "",
     pets: jade.pets,
     // ^ doesn't make a copy because 'jade.pets' is frozen
-    subscriptionStatus: User_SubscriptionStatus.unknown,
+    subscriptionStatus: SubscriptionStatus.unknown,
   );
 
   assert(identical(jack.pets, jade.pets));
@@ -298,7 +298,7 @@ void main() {
   //       picture: "🐒",
   //     ),
   //   ],
-  //   subscriptionStatus: User_SubscriptionStatus.wrapTrial(
+  //   subscriptionStatus: SubscriptionStatus.wrapTrial(
   //     User_Trial(
   //       startTime: DateTime.fromMillisecondsSinceEpoch(
   //         // 2025-04-02T11:13:29.000Z
@@ -343,7 +343,7 @@ void main() {
   //       picture: "🐒",
   //     ),
   //   ],
-  //   subscriptionStatus: User_SubscriptionStatus.wrapTrial(
+  //   subscriptionStatus: SubscriptionStatus.wrapTrial(
   //     User_Trial(
   //       startTime: DateTime.fromMillisecondsSinceEpoch(
   //         // 2025-04-02T11:13:29.000Z

@@ -21,7 +21,7 @@ void main() async {
             name: 'John Doe',
             quote: '',
             pets: [],
-            subscriptionStatus: User_SubscriptionStatus.unknown,
+            subscriptionStatus: SubscriptionStatus.unknown,
           ),
         ),
       );
