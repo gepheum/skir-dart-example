@@ -8,7 +8,7 @@ struct GetUserResponse {
   user: User?;
 }
 
-method GetUser(GetUserRequest): GetUserResponse;
+method GetUser(GetUserRequest): GetUserResponse = 12345;
 
 struct AddUserRequest {
   user: User;
@@ -16,4 +16,4 @@ struct AddUserRequest {
 
 struct AddUserResponse {}
 
-method AddUser(AddUserRequest): AddUserResponse;
+method AddUser(AddUserRequest): AddUserResponse = 23456;
