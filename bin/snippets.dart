@@ -3,6 +3,8 @@
 // Run with:
 //   dart run bin/snippets.dart
 
+import 'dart:typed_data';
+
 import 'package:skir_client/skir_client.dart' as skir;
 import 'package:skir_dart_example/all_strings_to_upper_case.dart';
 import 'package:skir_dart_example/skirout/user.dart';
@@ -182,8 +184,9 @@ void main() {
   final serializer = User.serializer;
 
   // Serialize 'john' to dense JSON.
-  print(serializer.toJsonCode(john));
-  // [42,"John Doe","Coffee is just a socially acceptable form of rage.",[["Dumbo",1.0,"🐘"]],[1]]
+  final String johnDenseJson = serializer.toJsonCode(john);
+  print(johnDenseJson);
+  // [42,"John Doe",...]
 
   // Serialize 'john' to readable JSON.
   print(serializer.toJsonCode(john, readableFlavor: true));
@@ -202,13 +205,13 @@ void main() {
   // }
 
   // The dense JSON flavor is the flavor you should pick if you intend to
-  // deserialize the value in the future. Soia allows fields to be renamed, and
+  // deserialize the value in the future. Skir allows fields to be renamed, and
   // because field names are not part of the dense JSON, renaming a field does
   // not prevent you from deserializing the value.
   // You should pick the readable flavor mostly for debugging purposes.
 
   // Serialize 'john' to binary format.
-  print(serializer.toBytes(john));
+  final Uint8List johnBytes = serializer.toBytes(john);
 
   // The binary format is not human readable, but it is slightly more compact
   // than JSON, and serialization/deserialization can be a bit faster in
@@ -217,7 +220,7 @@ void main() {
 
   // Use fromJson(), fromJsonCode() and fromBytes() to deserialize.
 
-  final reserializedJohn = serializer.fromJsonCode(serializer.toJsonCode(john));
+  final reserializedJohn = serializer.fromJsonCode(johnDenseJson);
   assert(reserializedJohn.name == "John Doe");
 
   final reserializedJane = serializer.fromJsonCode(
@@ -225,9 +228,7 @@ void main() {
   );
   assert(reserializedJane.name == "Jane Doe");
 
-  final reserializedLyla =
-      serializer.fromBytes(serializer.toBytes(mutableLyla.toFrozen()));
-  assert(reserializedLyla.name == "Lyla Doe");
+  assert(serializer.fromBytes(johnBytes) == john);
 
   // ===========================================================================
   // FROZEN LISTS AND COPIES
@@ -299,7 +300,7 @@ void main() {
   //     ),
   //   ],
   //   subscriptionStatus: SubscriptionStatus.wrapTrial(
-  //     User_Trial(
+  //     SubscriptionStatus_Trial(
   //       startTime: DateTime.fromMillisecondsSinceEpoch(
   //         // 2025-04-02T11:13:29.000Z
   //         1743592409000
@@ -328,7 +329,7 @@ void main() {
   print("Type descriptor deserialized successfully");
 
   // The 'allStringsToUpperCase' function uses reflection to convert all the
-  // strings contained in a given Soia value to upper case.
+  // strings contained in a given Skir value to upper case.
   // See the implementation at
   // https://github.com/gepheum/skir-dart-example/blob/main/lib/all_strings_to_upper_case.dart
   print(allStringsToUpperCase<User>(tarzan, User.serializer.typeDescriptor));
@@ -344,7 +345,7 @@ void main() {
   //     ),
   //   ],
   //   subscriptionStatus: SubscriptionStatus.wrapTrial(
-  //     User_Trial(
+  //     SubscriptionStatus_Trial(
   //       startTime: DateTime.fromMillisecondsSinceEpoch(
   //         // 2025-04-02T11:13:29.000Z
   //         1743592409000
