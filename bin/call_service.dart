@@ -1,4 +1,4 @@
-// Sends RPCs to a skir service.
+// Sends RPCs to a SkirRPC service.
 // See start_service.dart for how to start one.
 //
 // Run:

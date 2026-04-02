@@ -19,7 +19,7 @@ npx skir gen
 dart run bin/snippets.dart
 ```
 
-### Start a skir service
+### Start a SkirRPC service
 
 From one process, run:
 ```shell
