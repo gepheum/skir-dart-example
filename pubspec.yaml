@@ -6,7 +6,7 @@ environment:
   sdk: ^3.5.0
 
 dependencies:
-  skir_client: any
+  skir_client: ^1.0.11
   shelf: ^1.4.0
 
 dev_dependencies:
